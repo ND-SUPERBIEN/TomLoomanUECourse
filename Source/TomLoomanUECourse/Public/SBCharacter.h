@@ -3,8 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Character.h"
 #include "SBCharacter.generated.h"
+
+class UCameraComponent;
+class USpringArmComponent;
+class UInputMappingContext;
+class UInputAction;
+class UPawnMovementComponent;
 
 UCLASS()
 class TOMLOOMANUECOURSE_API ASBCharacter : public ACharacter
@@ -16,6 +23,24 @@ public:
 	ASBCharacter();
 
 protected:
+
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArmComp;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* CameraComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputMappingContext*  CharacterMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPawnMovementComponent* FloatingPawnMovement;
+	
+	void Move(const FInputActionValue& Value);
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
