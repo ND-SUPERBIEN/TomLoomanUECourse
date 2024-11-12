@@ -35,11 +35,15 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveAction;
-
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* LookAction;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UPawnMovementComponent* FloatingPawnMovement;
 	
 	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

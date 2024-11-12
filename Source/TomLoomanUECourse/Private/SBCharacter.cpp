@@ -38,6 +38,19 @@ void ASBCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
+void ASBCharacter::Look(const FInputActionValue& Value)
+{
+
+	const FVector2D LookAxisValue = Value.Get<FVector2D>();
+
+	if (GetController())
+	{
+		AddControllerYawInput(LookAxisValue.X);
+		AddControllerPitchInput(LookAxisValue.Y);
+	}
+	
+}
+
 // Called when the game starts or when spawned
 void ASBCharacter::BeginPlay()
 {
@@ -68,6 +81,7 @@ void ASBCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASBCharacter::Move);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASBCharacter::Look);
 	}
 
 }
